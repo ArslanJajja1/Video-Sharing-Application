@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "https://youtube-v31.p.rapidapi.com/";
+const API_URL = "https://youtube-v31.p.rapidapi.com";
 const options = {
     params: {
         // relatedToVideoId: "7ghhRHRP6t4",

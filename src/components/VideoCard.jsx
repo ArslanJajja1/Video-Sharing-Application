@@ -14,11 +14,13 @@ const VideoCard = ({
         id: { videoId },
         snippet,
     },
+    cardWidth,
 }) => {
+    console.log("card width ", cardWidth);
     return (
         <Card
             sx={{
-                width: { md: "340px", height: "320px", xs: "100%" },
+                width: { md: cardWidth, xs: "100%" },
                 boxShadow: "none",
                 borderRadius: 0,
             }}
@@ -27,7 +29,7 @@ const VideoCard = ({
                 <CardMedia
                     image={snippet?.thumbnails?.high?.url}
                     alt={snippet?.title}
-                    sx={{ width: 340, height: 180 }}
+                    sx={{ width: "100%", height: 180 }}
                 />
             </Link>
             <CardContent sx={{ backgroundColor: "#1e1e1e", height: "105px" }}>

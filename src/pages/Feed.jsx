@@ -1,20 +1,23 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Stack, Typography } from "@mui/material";
-import Sidebar from "../components/Sidebar";
-import Videos from "../components/Videos";
 import { fetchFromApi } from "../utils/fetchFromApi";
+import Videos from "../components/Videos";
+import Sidebar from "../components/Sidebar";
 
 const Feed = () => {
     const [selectedCategory, setSelectedCategory] = useState("New");
-    const [videos, setVideos] = useState([]);
+    const [videos, setVideos] = useState(null);
+
     useEffect(() => {
+        setVideos(null);
+
         fetchFromApi(`search?part=snippet&q=${selectedCategory}`).then((data) =>
             setVideos(data.items)
         );
     }, [selectedCategory]);
 
     return (
-        <Stack sx={{ flexDirection: { sx: "columnn", md: "row" } }}>
+        <Stack sx={{ flexDirection: { sx: "column", md: "row" } }}>
             <Box
                 sx={{
                     height: { sx: "auto", md: "92vh" },
@@ -26,21 +29,16 @@ const Feed = () => {
                     selectedCategory={selectedCategory}
                     setSelectedCategory={setSelectedCategory}
                 />
+
                 <Typography
                     className="copyright"
                     variant="body2"
                     sx={{ mt: 1.5, color: "#fff" }}
                 >
-                    Build By{" "}
-                    <a
-                        style={{ color: "#fff", fontStyle: "italic" }}
-                        target="_blank"
-                        href="https://github.com/arslanjajja1"
-                    >
-                        @Arslan Jajja
-                    </a>
+                    Copyright © 2022 JSM Media
                 </Typography>
             </Box>
+
             <Box p={2} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>
                 <Typography
                     variant="h4"
@@ -49,9 +47,10 @@ const Feed = () => {
                     sx={{ color: "white" }}
                 >
                     {selectedCategory}{" "}
-                    <span style={{ color: "#F31503" }}>videos</span>
+                    <span style={{ color: "#FC1503" }}>videos</span>
                 </Typography>
-                <Videos videos={videos} cardWidth="340px" />
+
+                <Videos videos={videos} />
             </Box>
         </Stack>
     );
